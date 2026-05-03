@@ -19,8 +19,8 @@ CREATE TABLE "resources" (
   "url" TEXT,
   "is_ada" boolean,
   "theme_id" INTEGER,
-  "created_at" timestamptz,
-  "updated_at" timestamptz
+  "created_at" timestamptz,  --date de creation
+  "updated_at" timestamptz  -- date de MAJ
 );
 
 CREATE TABLE "skills" (
