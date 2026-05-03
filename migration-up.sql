@@ -1,37 +1,38 @@
---Creation de table
-CREATE TABLE "resources" (
-  "id" integer PRIMARY KEY,
-  "type" VARCHAR(50),
-  "title" text,
-  "description" text,
-  "url" text,
-  "is_ada" boolean,
-  "theme_id" integer,
+--creation de l'enum
+CREATE TYPE resource_type AS ENUM('guide', 'video', 'exercice', 'projet');
+
+--creation de table
+
+CREATE TABLE "themes" (
+  "id" INTEGER PRIMARY KEY,
+  "name" TEXT,
+  "description" TEXT,
   "created_at" timestamptz,
   "updated_at" timestamptz
 );
 
-CREATE TABLE "resources_skills" (
-  "resource_id" integer,
-  "skill_id" integer
-);
-
-CREATE TYPE resource_type AS ENUM (
-  'guide', 'video', 'exercise', 'projet'
+CREATE TABLE "resources" (
+  "id" INTEGER PRIMARY KEY,
+  "type" resource_type,
+  "title" TEXT,
+  "description" TEXT,
+  "url" TEXT,
+  "is_ada" boolean,
+  "theme_id" INTEGER,
+  "created_at" timestamptz,
+  "updated_at" timestamptz
 );
 
 CREATE TABLE "skills" (
-  "id" integer PRIMARY KEY,
-  "name" text
+  "id" INTEGER PRIMARY KEY,
+  "name" TEXT
 );
 
-CREATE TABLE "themes" (
-  "id" integer PRIMARY KEY,
-  "name" text,
-  "description" text,
-  "created_at" timestamptz,
-  "updated_at" timestamptz
+CREATE TABLE "resources_skills" (
+  "resource_id" INTEGER,
+  "skill_id" INTEGER
 );
+
 
 ALTER TABLE "resources" ADD FOREIGN KEY ("theme_id") REFERENCES "themes" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
